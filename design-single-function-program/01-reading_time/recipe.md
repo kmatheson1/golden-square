@@ -36,7 +36,7 @@ If we give an empty string.
 It will return an error "Cannot give reading time when no text is given"
 """
 reading_time("")
-# => ""Reading time will be: 0:00:00"
+# => ""Cannot give reading time when no text is given"
 
 """
 If we give a string containing 1 word.
