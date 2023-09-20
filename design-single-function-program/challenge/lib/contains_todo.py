@@ -6,7 +6,7 @@ def contains_todo(text):
     
     filtered_words = []
     for word in text.split():
-        filtered_letters = [letter for letter in word if letter.isalpha() or letter == '#']
+        filtered_letters = [letter for letter in word if letter.isalpha() or letter[0] == '#']
         filtered_word = ''.join(filtered_letters)
         filtered_words.append(filtered_word)
 
