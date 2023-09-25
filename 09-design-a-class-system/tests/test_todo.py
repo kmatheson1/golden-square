@@ -1,4 +1,4 @@
-# File: tests/test_todo.
+# File: tests.test_todo.py
 from lib.todo import Todo
 import pytest
 
@@ -9,7 +9,7 @@ returns error message
 def test_empty_string_as_task_returns_error():
     with pytest.raises(Exception) as e:
         todo1 = Todo("")
-    assert str(e.value) == "Cannot create task is no task is gibven."
+    assert str(e.value) == "Cannot create task is no task is given."
 
 """
 When initialized
