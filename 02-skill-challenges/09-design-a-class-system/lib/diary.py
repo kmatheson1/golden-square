@@ -19,15 +19,14 @@ class Diary():
 
     def list_numbers(self):
         for entry in self._diary_entries:
-            numbers = entry.extract_numbers()
-            self._phonebook.extend(numbers)
+            self._phonebook.extend(entry.extract_numbers())
         return self._phonebook
     
     def list_tasks_incomplete(self):
-        return [task.task for task in self._tasks if task.complete == False]
+        return [task.task for task in self._tasks if not task.complete]
 
     def list_tasks_complete(self):
-        return [task.task for task in self._tasks if task.complete == True]
+        return [task.task for task in self._tasks if task.complete]
 
     def find_best_entry_for_reading_time(self, wpm, minutes):
         readable_words = minutes * wpm
