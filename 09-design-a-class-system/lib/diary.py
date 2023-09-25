@@ -47,10 +47,3 @@ class Diary():
         for task in self._tasks:
             if task.complete == False:
                 task.mark_complete()
-
-diary = Diary()
-entry_1 = DiaryEntry("Note", "Kieran's number is 07930000000")
-entry_2 = DiaryEntry("Note", "Hannah's number is 07900000000")
-diary.add_entry(entry_1)
-diary.add_entry(entry_2)
-print(diary.list_numbers())
