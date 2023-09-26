@@ -1,6 +1,6 @@
 from lib.task_list import TaskList
 from lib.task import Task
-
+from lib.task_formatter import TaskFormatter
 
 def test_adds_tasks_to_list():
     task_list = TaskList()
@@ -20,3 +20,14 @@ def test_marks_tasks_as_complete():
     task_1.mark_complete()
     task_2.mark_complete()
     assert task_list.all_complete() == True
+
+def test_format_correct_if_incomplete():
+    task = Task("Walk the dog.")
+    formatter = TaskFormatter(task)
+    assert formatter.format() == "- [ ] Walk the dog."
+
+def test_format_correct_if_complete():
+    task = Task("Walk the dog.")
+    task.mark_complete()
+    formatter = TaskFormatter(task)
+    assert formatter.format() == "- [x] Walk the dog."
