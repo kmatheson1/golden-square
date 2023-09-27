@@ -88,10 +88,12 @@ _Also design the interface of each class in more detail._
         #       A dish name as a string, a price as a float
         #   Side-effects:
         #       Available property constructed as equal to True
+            pass
 
         def mark_unavailable(self):
         #   Side-effects:
         #       Sets Available property to False
+            pass
 
 #   class Orderer():
         def __init__(self, sent_order, time):
