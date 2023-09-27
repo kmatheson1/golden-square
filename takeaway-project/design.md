@@ -72,7 +72,7 @@ _Also design the interface of each class in more detail._
         #       Dish is added to menu dictionary.
         pass
 
-        def remove_dish_menu(self, dish):
+        def remove_dish(self, dish):
         #   Parameters:
         #       An instance of the Dish class
         #   Side-effects:
@@ -130,6 +130,28 @@ _Create examples of the classes being used together in different situations and 
 # EXAMPLE 
 
 '''
+"""
+if #add_dish_menu is called with an instance of DishCreator
+#display_menu will return a list containing that dish
+"""
+def test_add_one_dish_display_menu():
+    dish1 = DishCreator("Pizza": "2.00")
+    menu = MenuCreator()
+    menu.add_dish_menu(dish1)
+    assert menu.display_menu() == [dish1]
+
+"""
+if #add_dish is called with 2 instances of DishCreator
+#display_menu will return a list containing both dishes,
+"""
+def test_add_two_dishes_display_menu():
+    dish1 = DishCreator("Pizza": "2.00")
+    dish2 = DishCreator("Pasta": "3.00")
+    menu = MenuCreator()
+    menu.add_dish_menu(dish1)
+    menu.add_dish_menu(dish2)
+    assert menu.display_menu() == [dish1, dish2]
+
 
 _Create examples, where appropriate, of the behaviour of each relevant class at a more granular level of detail._
 '''python
