@@ -3,15 +3,17 @@ from lib.order_creator import OrderCreator
 from unittest.mock import Mock
 import pytest
 
+def test_err_if_empty_menu():
+    menu = []
+    with pytest.raises(Exception) as err:
+        OrderCreator(menu)
+    assert str(err.value) == "Menu is empty."
+
 def test_create_order_constructed_with_display_menu_mock():
-    dish1 = Mock()
-    dish2 = Mock()
-    dish3 = Mock()
-    menu = Mock()
-    menu.display_menu.return_value = {dish1.dish: dish1.price, dish2.dish: dish2.price, dish3.dish: dish3.price}
-    order1 = OrderCreator(menu)
-    order1.menu = {dish1.dish: dish1.price, dish2.dish: dish2.price, dish3.dish: dish3.price}
-    assert order1.menu == menu.display_menu()
+    mock_menu = Mock()
+    mock_menu.display_menu.return_value = {'Pizza': 3.00, 'Pasta': 3.00, 'Steak': 4.00, 'Tuna': 4.00}
+    order1 = OrderCreator(mock_menu)
+    assert order1.display_formatted_menu() == "Dishes  Prices\nPizza  £3.00\nPasta  £3.00\nSteak  £4.00\nTuna  £4.00"
 
 """
 If add_dish_menu one dish to order

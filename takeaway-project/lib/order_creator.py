@@ -4,18 +4,24 @@
 
 class OrderCreator():
     def __init__(self, menu):
-        self.menu = menu.display_menu()
+        if menu == []:
+            raise Exception("Menu is empty.")
+
+        self._menu = menu.display_menu()
         self.order = {}
 
+    def display_formatted_menu(self):
+        return "Dishes  Prices\n" + "\n".join([f'{key}  £{value:.2f}' for key, value in self._menu.items()])
+
     def add_to_order(self, dish, quantity):
-        if not dish in self.menu:
+        if not dish in self._menu:
             raise Exception("Dish is not on the menu.")
 
         if dish in self.order:
             self.order[dish]['Quantity'] += quantity
-            self.order[dish]['Price'] = self.menu[dish] * self.order[dish]['Quantity']
+            self.order[dish]['Price'] = self._menu[dish] * self.order[dish]['Quantity']
         else:
-            self.order[dish] = {"Quantity": quantity, "Price": (self.menu[dish] * quantity)}
+            self.order[dish] = {"Quantity": quantity, "Price": (self._menu[dish] * quantity)}
 
     def remove_from_order(self, dish):
         if not dish in self.order:
@@ -58,12 +64,12 @@ class OrderCreator():
 #dish3 = DishCreator("Steak", "4.00")
 #dish4 = DishCreator("Tuna", "4.00")
 #dish5 = DishCreator("Garlic Bread", "1.00")
-#menu = MenuCreator()
-#menu.add_dish_menu(dish1)
-#menu.add_dish_menu(dish2)
-#menu.add_dish_menu(dish3)
-#menu.add_dish_menu(dish4)
-#order1 = OrderCreator(menu)
-#print(order1.menu)
+#_menu = MenuCreator()
+#_menu.add_dish_menu(dish1)
+#_menu.add_dish_menu(dish2)
+#_menu.add_dish_menu(dish3)
+#_menu.add_dish_menu(dish4)
+#order1 = OrderCreator(_menu)
+#print(order1._menu)
 #order1.add_to_order("Pasta", 1)
 #print(order1.order)

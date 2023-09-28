@@ -5,16 +5,6 @@ from lib.menu_creator import MenuCreator
 import pytest
 
 """
-When CreateOrder is instanciated
-It is constructed with menu as dictionary
-"""
-def test_create_order_constructed_with_display_menu():
-    menu = MenuCreator()
-    order1 = OrderCreator(menu)
-    assert order1.menu == menu.display_menu()
-
-
-"""
 If add_dish_menu one dish to order
 #itemised_total returns dish price and total price
 """
