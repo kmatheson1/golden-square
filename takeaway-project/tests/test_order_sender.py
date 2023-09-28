@@ -1,7 +1,7 @@
 # File: tests/test_order_sender.py
 from lib.order_sender import OrderSender
 from unittest.mock import Mock
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def test_view_receipt_mock():
     mock_order = Mock()
@@ -17,3 +17,12 @@ def test_time_sent_mock():
     order1 = Mock()
     send = OrderSender(order1)
     assert send.time_sent() == f'Time Order Sent: {datetime.now().strftime("%H:%M")}'
+
+"""
+when #eta is called
+string message with estimated time of arrival returned
+"""
+def test_eta_mock():
+    order1 = Mock()
+    send = OrderSender(order1)
+    assert send.eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'
