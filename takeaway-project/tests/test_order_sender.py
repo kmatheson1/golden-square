@@ -25,4 +25,4 @@ string message with estimated time of arrival returned
 def test_eta_mock():
     order1 = Mock()
     send = OrderSender(order1)
-    assert send.eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'
+    assert send.format_eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'

@@ -55,4 +55,4 @@ def test_eta():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     send = OrderSender(order1)
-    assert send.eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'
+    assert send.format_eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'
