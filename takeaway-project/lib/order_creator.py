@@ -5,32 +5,52 @@
 class OrderCreator():
     def __init__(self, menu):
         self.menu = menu.display_menu()
-        self.order = {
-
-        }
+        self.order = {}
 
     def add_to_order(self, dish, quantity):
+        if not dish in self.menu:
+            raise Exception("Dish is not on the menu.")
+
         if dish in self.order:
             self.order[dish]['Quantity'] += quantity
+            self.order[dish]['Price'] = self.menu[dish] * self.order[dish]['Quantity']
         else:
-            self.order[dish] = {"Quantity": quantity, "Price": self.menu[dish]}
+            self.order[dish] = {"Quantity": quantity, "Price": (self.menu[dish] * quantity)}
 
     def remove_from_order(self, dish):
-    #   Parameters:
-    #       A dish from the menu
-    #   Side-effects:
-    #       The dish (all quntity) is removed frothe current order
-        pass
+        if not dish in self.order:
+            raise Exception("Dish not in basket.")
+
+        del self.order[dish]
 
     def clear_order(self):
-    #   Side-effects:
-    #       All dishes removed from current order
-        pass
+        if self.order == {}:
+            raise Exception('Basket is already empty.')
+
+        self.order = {}
 
     def itemised_total(self):
-    #   Returns:
-    #       List of current dishes added to ordertheir prices, and total cost of order so far
-        pass
+        if self.order == {}:
+            return 'Basket is empty.'
+
+        order_total = 0
+        items = []
+
+        for dish in self.order:
+            quantity = self.order[dish]['Quantity']
+            price_quant = self.order[dish]['Price']
+            order_total += price_quant
+            items.append(f'{quantity} {dish} - {price_quant:.2f}')
+        
+        items_str = ', '.join(items)
+        order_total_str = f'Order Total: £{order_total:.2f}'
+        
+        return f'Dishes: {items_str}\n{order_total_str}'
+
+        #dish = 'Pizza'
+        #quantity = self.order['Pizza']['Quantity']
+        #price = (self.order['Pizza']['Price'])
+        #return f'Dishes: {quantity} {dish} - {price:.#2f}  Order Total: {price:.2f}'
 
 
 #dish1 = DishCreator("Pizza", "2.00")
