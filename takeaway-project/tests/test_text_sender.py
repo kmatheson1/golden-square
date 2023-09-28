@@ -2,6 +2,7 @@
 from unittest.mock import Mock
 from lib.text_sender import TextSender
 import pytest
+import os
 
 """
 When TextSender is instanciated
@@ -11,5 +12,5 @@ A text is sent with an eta
 def test_text_sends_eta():
     sent_order_mock = Mock()
     sent_order_mock.eta.return_value = "18:52"
-    confirmation = TextSender(sent_order_mock)
+    confirmation = TextSender(sent_order_mock, os.environ.get('MY_PHONE_NUMBER'))
     assert confirmation.send_text() == "Message Sent."

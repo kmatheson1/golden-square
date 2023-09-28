@@ -5,12 +5,13 @@ from lib.order_creator import OrderCreator
 from lib.order_sender import OrderSender
 from lib.text_sender import TextSender
 import pytest
+import os
 
 """
 If send_text is called
 Text with eta will be sent
 """
-#@pytest.mark.skip(reason="Sends text.")
+@pytest.mark.skip(reason="Sends text.")
 def test_send_text():
     dish1 = DishCreator("Pizza", 3.00)
     dish2 = DishCreator("Pasta", 3.00)
@@ -25,5 +26,5 @@ def test_send_text():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     send_order = OrderSender(order1)
-    confirmation = TextSender(send_order)
+    confirmation = TextSender(send_order, os.environ.get('MY_PHONE_NUMBER'))
     assert confirmation.send_text() == "Message Sent."
