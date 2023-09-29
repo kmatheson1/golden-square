@@ -99,7 +99,7 @@ def remove_from_order(order):
         except Exception:
             print('\nDish not in Basket.')
 
-#send orde feature 
+#send order feature 
 def send_order(order):
     if order.itemised_total() == 'Basket is empty.':
             print('\nNo order to send.\n')
