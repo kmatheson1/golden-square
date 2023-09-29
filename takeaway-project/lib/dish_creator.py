@@ -13,12 +13,14 @@ class DishCreator():
             raise Exception("Dish must have a cost.")
 
     def mark_unavailable(self):
+        #makes dish unavailable to be used on an ordering menu
         if not self.available:
             raise Exception("Dish already unavailable.")
-
+        
         self.available = False
 
     def mark_available(self):
+        #makes dish available to be used on an ordering menu
         if self.available:
             raise Exception("Dish already available.")
 

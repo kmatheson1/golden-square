@@ -12,6 +12,7 @@ class MenuCreator():
         self._menu.remove(dish)
 
     def display_menu(self):
+        #creates menu as a dictionary
         return {dish.dish: dish.price for dish in self._menu if dish.available}
 
 

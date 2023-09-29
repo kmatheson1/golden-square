@@ -20,7 +20,7 @@ def test_itemised_total_for_one_dish():
     menu.add_dish_menu(dish4)
     order1 = OrderCreator(menu)
     order1.add_to_order("Pizza", 1)
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00\nOrder Total: £3.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\nOrder Total: £3.00"
 
 """
 If #add_dish_menu multiple dish to order
@@ -40,7 +40,7 @@ def test_itemised_total_for_multiple_dish():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     order1.add_to_order("Steak", 3)
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00, 3 Steak - 12.00\nOrder Total: £21.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\n3 Steak - 12.00\nOrder Total: £21.00"
 
 """
 If #remove_from_order is called
@@ -61,7 +61,7 @@ def test_remove_from_order_removes_dish():
     order1.add_to_order("Pasta", 2)
     order1.add_to_order("Steak", 3)
     order1.remove_from_order("Steak")
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00\nOrder Total: £9.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\nOrder Total: £9.00"
 
 """
 If #clear_order is called

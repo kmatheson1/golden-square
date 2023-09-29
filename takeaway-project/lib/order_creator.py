@@ -4,59 +4,59 @@
 
 class OrderCreator():
     def __init__(self, menu):
+        #initialized with menu in dictionary form and empty order dictionary
+
         if menu == []:
             raise Exception("Menu is empty.")
 
         self._menu = menu.display_menu()
-        self.order = {}
+        self._order = {}
 
     def display_formatted_menu(self):
+        #user can call a formatted version of the menu they can order from.
         return "Dishes  Prices\n" + "\n".join([f'{key}  £{value:.2f}' for key, value in self._menu.items()])
 
     def add_to_order(self, dish, quantity):
         if not dish in self._menu:
             raise Exception("Dish is not on the menu.")
-
-        if dish in self.order:
-            self.order[dish]['Quantity'] += quantity
-            self.order[dish]['Price'] = self._menu[dish] * self.order[dish]['Quantity']
+        
+        #adds quantity and totalprice of dishes to ordeorder dictionary.  If dish is already on the _order, the quantity/total price will be updated.
+        if dish in self._order:
+            self._order[dish]['Quantity'] += quantity
+            self._order[dish]['Price'] = self._menu[dish] * self._order[dish]['Quantity']
         else:
-            self.order[dish] = {"Quantity": quantity, "Price": (self._menu[dish] * quantity)}
+            self._order[dish] = {"Quantity": quantity, "Price": (self._menu[dish] * quantity)}
 
     def remove_from_order(self, dish):
-        if not dish in self.order:
+        if not dish in self._order:
             raise Exception("Dish not in basket.")
 
-        del self.order[dish]
+        del self._order[dish]
 
     def clear_order(self):
-        if self.order == {}:
+        if self._order == {}:
             raise Exception('Basket is already empty.')
-
-        self.order = {}
+        
+        self._order = {}
 
     def itemised_total(self):
-        if self.order == {}:
+        if self._order == {}:
             return 'Basket is empty.'
 
         order_total = 0
         items = []
 
-        for dish in self.order:
-            quantity = self.order[dish]['Quantity']
-            price_quant = self.order[dish]['Price']
+        #iterates through _order to add prices to format quantity, dish, prices, and add prices to total.
+        for dish in self._order:
+            quantity = self._order[dish]['Quantity']
+            price_quant = self._order[dish]['Price']
             order_total += price_quant
             items.append(f'{quantity} {dish} - {price_quant:.2f}')
         
-        items_str = ', '.join(items)
+        items_str = '\n'.join(items)
         order_total_str = f'Order Total: £{order_total:.2f}'
         
-        return f'Dishes: {items_str}\n{order_total_str}'
-
-        #dish = 'Pizza'
-        #quantity = self.order['Pizza']['Quantity']
-        #price = (self.order['Pizza']['Price'])
-        #return f'Dishes: {quantity} {dish} - {price:.#2f}  Order Total: {price:.2f}'
+        return f'Dishes:\n{items_str}\n{order_total_str}'
 
 
 #dish1 = DishCreator("Pizza", "2.00")
@@ -72,4 +72,4 @@ class OrderCreator():
 #order1 = OrderCreator(_menu)
 #print(order1._menu)
 #order1.add_to_order("Pasta", 1)
-#print(order1.order)
+#print(order1._order)

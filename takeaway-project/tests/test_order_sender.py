@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 
 def test_view_receipt_mock():
     mock_order = Mock()
-    mock_order.itemised_total.return_value = "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00\nOrder Total: £9.00"
+    mock_order.itemised_total.return_value = "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\nOrder Total: £9.00"
     send = OrderSender(mock_order)
-    assert send.view_receipt() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00\nOrder Total: £9.00"
+    assert send.view_receipt() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\nOrder Total: £9.00"
 
 """
 When #time_sent is called

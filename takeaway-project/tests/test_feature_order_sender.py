@@ -23,7 +23,7 @@ def test_receipt():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     send = OrderSender(order1)
-    assert send.view_receipt() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00\nOrder Total: £9.00"
+    assert send.view_receipt() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\nOrder Total: £9.00"
 
 """
 When #time_sent is called
@@ -55,4 +55,4 @@ def test_eta():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     send = OrderSender(order1)
-    assert send.format_eta() == f'Estimated Time of Arrival: {(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'
+    assert send.eta() == f'{(datetime.now() + timedelta(minutes=30)).strftime("%H:%M")}'

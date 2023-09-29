@@ -24,7 +24,7 @@ def test_add_order_adds_to_order_mock():
     mock_menu.display_menu.return_value = {'Pizza': 2.00, 'Pasta': 3.00, 'Steak': 4.00, 'Tuna': 4.00}
     order1 = OrderCreator(mock_menu)
     order1.add_to_order("Pizza", 1)
-    assert order1.order == {'Pizza': {'Quantity': 1, 'Price': 2.00}}
+    assert order1._order == {'Pizza': {'Quantity': 1, 'Price': 2.00}}
 
 """
 If add_dish_menu multiple of same dish
@@ -35,7 +35,7 @@ def test_add_order_adds_multiple_to_order_mock():
     mock_menu.display_menu.return_value = {'Pizza': 2.00, 'Pasta': 3.00, 'Steak': 4.00, 'Tuna': 4.00}
     order1 = OrderCreator(mock_menu)
     order1.add_to_order("Pizza", 2)
-    assert order1.order == {'Pizza': {'Quantity': 2, 'Price': 4.00}}
+    assert order1._order == {'Pizza': {'Quantity': 2, 'Price': 4.00}}
 
 """
 If multiple and different dishes added to order
@@ -47,7 +47,7 @@ def test_add_order_adds_multiple_different_to_order_mock():
     order1 = OrderCreator(mock_menu)
     order1.add_to_order("Pizza", 2)
     order1.add_to_order("Pasta", 1)
-    assert order1.order == {'Pizza': {'Quantity': 2, 'Price': 4.00}, 'Pasta': {'Quantity': 1, 'Price': 3.00}}
+    assert order1._order == {'Pizza': {'Quantity': 2, 'Price': 4.00}, 'Pasta': {'Quantity': 1, 'Price': 3.00}}
 
 """
 If dish added to order twice
@@ -59,14 +59,14 @@ def test_dish_added_twice_updates_quantity_mock():
     order1 = OrderCreator(mock_menu)
     order1.add_to_order("Pizza", 2)
     order1.add_to_order("Pizza", 2)
-    assert order1.order == {'Pizza': {'Quantity': 4, 'Price': 8.00}}
+    assert order1._order == {'Pizza': {'Quantity': 4, 'Price': 8.00}}
 
 def test_itemised_total_for_one_dish_mock():
     mock_menu = Mock()
     mock_menu.display_menu.return_value = {'Pizza': 3.00, 'Pasta': 3.00, 'Steak': 4.00, 'Tuna': 4.00}
     order1 = OrderCreator(mock_menu)
     order1.add_to_order("Pizza", 1)
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00\nOrder Total: £3.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\nOrder Total: £3.00"
 
 def test_itemised_total_for_multiple_dish_mock():
     mock_menu = Mock()
@@ -76,7 +76,7 @@ def test_itemised_total_for_multiple_dish_mock():
     order1.add_to_order("Pizza", 1)
     order1.add_to_order("Pasta", 2)
     order1.add_to_order("Steak", 3)
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00, 3 Steak - 12.00\nOrder Total: £21.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\n3 Steak - 12.00\nOrder Total: £21.00"
 
 def test_remove_from_order_removes_dish_mock():
     mock_menu = Mock()
@@ -86,7 +86,7 @@ def test_remove_from_order_removes_dish_mock():
     order1.add_to_order("Pasta", 2)
     order1.add_to_order("Steak", 3)
     order1.remove_from_order("Steak")
-    assert order1.itemised_total() == "Dishes: 1 Pizza - 3.00, 2 Pasta - 6.00\nOrder Total: £9.00"
+    assert order1.itemised_total() == "Dishes:\n1 Pizza - 3.00\n2 Pasta - 6.00\nOrder Total: £9.00"
 
 def test_clear_order_and_message_mock():
     mock_menu = Mock()
