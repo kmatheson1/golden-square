@@ -31,5 +31,6 @@ class TextSender():
             to=self._user_phone_number,
             from_=phone_number,
             body=f"Thank you! Your order was placed and will be delivered before {eta_time}.")
-
+        
+        message
         return "Message Sent."
