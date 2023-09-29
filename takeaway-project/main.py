@@ -28,6 +28,7 @@ order = OrderCreator(menu)
 print('Please Create your order from the following menu:')
 print(order.display_formatted_menu())
 
+#Main Order Creator
 def main():
     while True:
         print("\n1. Add to order")
@@ -37,7 +38,7 @@ def main():
         print("5. Send Order")
         print("6. Exit")
 
-        choice = input("Enter your choice: ")
+        choice = input("\nEnter your choice: ")
 
         if choice == "1":
             add_to_order(order)
@@ -53,7 +54,7 @@ def main():
                 print('Order is already empty.')
 
         elif choice == "4":
-            print(f'\n{order.itemised_total()}\n')
+            print(f'\n{order.itemised_total()}')
 
         elif choice == "5":
             send_order(order)
@@ -66,18 +67,27 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
+#Add to order feature
 def add_to_order(order):
     while True:
         try:
             dish_name = input("\nEnter dish name to add to the order (or 'done' to finish): ").lower().capitalize()
             if dish_name.lower() == "done":
                 break
-            quantity = int(input("Enter quantity: "))
-            order.add_to_order(dish_name, quantity)
-            print(f"{quantity} {dish_name}(s) added to the order.")
+
+            while True:
+                quantity = int(input("Enter quantity: "))
+                if quantity <= 0:
+                    print("Quantity cannot be 0 or negative. Please enter a valid quantity.")
+                else:
+                    order.add_to_order(dish_name, quantity)
+                    print(f"{quantity} {dish_name}(s) added to the order.")
+                    break
+
         except Exception:
             print("\nDish is not on the Menu.")
 
+#Remove from order feature
 def remove_from_order(order):
     while True:
         try:
@@ -89,6 +99,7 @@ def remove_from_order(order):
         except Exception:
             print('\nDish not in Basket.')
 
+#send orde feature 
 def send_order(order):
     if order.itemised_total() == 'Basket is empty.':
             print('\nNo order to send.\n')
@@ -103,7 +114,7 @@ def send_order(order):
         print("4. Receive Confirmation as text message")
         print("5. Exit")
 
-        choice = input("Enter your choice: ")
+        choice = input("\nEnter your choice: ")
 
         if choice == "1":
             print(f'\n{sent_order.view_receipt()}')
@@ -124,31 +135,7 @@ def send_order(order):
             print("Exiting the program.")
             break
 
-
-
 if __name__ == "__main__":
     main()
-
-
-    
-
-#dish1 = DishCreator("Pizza", "2.00")
-#dish2 = DishCreator("Pasta", "3.00")
-#dish3 = DishCreator("Steak", "4.00")
-#dish4 = DishCreator("Tuna", "4.00")
-#dish5 = DishCreator("Bread", "1.00")
-#print('Dishes Created.')
-#
-#menu = MenuCreator()
-#menu.add_dish_menu(dish1)
-#menu.add_dish_menu(dish2)
-#menu.add_dish_menu(dish3)
-#menu.add_dish_menu(dish4)
-#menu.add_dish_menu(dish5)
-#print('Dishes Added to Menu.\n\n')
-#
-#order = OrderCreator(menu)
-#print('Please Create your order from the following menu:\nCall Functions on <order>')
-#print(order.display_formatted_menu())
 
 
